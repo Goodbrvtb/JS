@@ -2611,5 +2611,71 @@ function dateLate (datePast){
 console.log(dateLate("2024-05-16T11:21:12.928Z"), new Date())
 
 
+1. Создай класс `Rectangle` с двумя свойствами: `width` и `heigh` и метод `getArea()`, который будет возвращать площадь прямоугольника.
+class Rectangle {
+  constructor(width, heigth) {
+    this.width = width;
+    this.heigth = heigth;
+  }
+    
+  getArea() {
+    return this.width*this.heigth
+  }
+}
 
+const myRectangle = new Rectangle(5, 25);
+
+console.log(myRectangle.getArea());
+
+2. Создай класс `Square`, который наследует свойства и методы класса `Rectangle` и имеет дополнительное свойство `sideLength`. Переопредели метод `getArea()` так, чтобы он возвращал площадь квадрата.
+class Rectangle {
+  constructor(width, heigth) {
+    this.width = width;
+    this.heigth = heigth;
+  }
+
+
+
+  getArea() {
+    return this.width*this.heigth
+  }
+}
+class Square extends Rectangle {
+  constructor (sideLength, width, heigth){
+  super (width, heigth);
+   this.sideLength=sideLength;
+  
+}
+
+getArea(){
+  return Math.pow(this.sideLength, 2)
+}
+}
+
+const mySquare = new Square(7);
+const myRectangle = new Rectangle(5, 25);
+
+console.log(myRectangle.getArea());
+console.log(mySquare.getArea());
+3. Создай класс `Teacher` с свойствами `name` и `ratings` , а так же методом `gradeStudent(grade)`, который будет добавлять оценку `grade` в массив оценок студента `ratings`.
+
+class Teacher  {
+  constructor (name, rating){
+    this.name = name;
+    this.rating = rating || []
+  }
+
+  gradeStudent(grade){
+    this.grade=grade
+    this.rating.push(grade)
+  }
+}
+
+const Vova = new Teacher ('Misha')
+
+Vova.gradeStudent(4)
+Vova.gradeStudent(4)
+
+
+console.log(Vova.rating)
 
