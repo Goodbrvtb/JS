@@ -2679,3 +2679,51 @@ Vova.gradeStudent(4)
 
 console.log(Vova.rating)
 
+4. Создай класс `BankAccount` с двумя свойствами: `balance` и `ownerName`. Добавь методы `deposit(amount)` и `withdraw(amount)`, которые будут добавлять и снимать сумму `amount` со счета соответственно. Добавь метод `getBalance()`, который будет возвращать текущий баланс счета.
+class BankAccount {
+  constructor (balance, ownerName){
+    this.balance = balance;
+    this.ownerName = ownerName;
+  }
+
+  deposit(amount){
+    this.amount=amount;
+    this.balance= this.balance+this.amount
+  }
+
+  withdraw(amount){
+    this.amount= amount;
+    this.balance= this.balance-this.amount
+  }
+  getBalance(){
+    return this.balance
+  }
+}
+
+const myBank = new BankAccount (0, 'Vova')
+
+console.log(myBank.getBalance())
+
+myBank.deposit(100)
+
+console.log(myBank.getBalance())
+myBank.withdraw(10)
+console.log(myBank.getBalance())
+
+5. Создай класс `Product` с двумя свойствами: `name` и `price`. Добавь метод `priceWithTax`, который будет возвращать цену товара с учетом налога на продажи в размере 10%. Процентную ставку нужно хранить в приватном свойстве.
+class Product {
+
+  constructor (name,price){
+    this.name=name;
+    this.price=price
+  }
+
+  #tax=10;
+  priceWithTax (){
+    return this.price+this.price/100*this.#tax
+  }
+}
+
+const myProduct = new Product('meat', 100)
+
+console.log(myProduct.priceWithTax())
