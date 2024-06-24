@@ -2634,15 +2634,13 @@ class Rectangle {
     this.heigth = heigth;
   }
 
-
-
   getArea() {
     return this.width*this.heigth
   }
 }
 class Square extends Rectangle {
-  constructor (sideLength, width, heigth){
-  super (width, heigth);
+  constructor (sideLength){
+  super ();
    this.sideLength=sideLength;
   
 }
@@ -2658,7 +2656,6 @@ const myRectangle = new Rectangle(5, 25);
 console.log(myRectangle.getArea());
 console.log(mySquare.getArea());
 3. Создай класс `Teacher` с свойствами `name` и `ratings` , а так же методом `gradeStudent(grade)`, который будет добавлять оценку `grade` в массив оценок студента `ratings`.
-
 class Teacher  {
   constructor (name, rating){
     this.name = name;
@@ -2666,7 +2663,6 @@ class Teacher  {
   }
 
   gradeStudent(grade){
-    this.grade=grade
     this.rating.push(grade)
   }
 }
@@ -2687,13 +2683,13 @@ class BankAccount {
   }
 
   deposit(amount){
-    this.amount=amount;
-    this.balance= this.balance+this.amount
+   
+    this.balance+=amount
   }
 
   withdraw(amount){
-    this.amount= amount;
-    this.balance= this.balance-this.amount
+    
+    this.balance-=amount
   }
   getBalance(){
     return this.balance
