@@ -2640,7 +2640,7 @@ class Rectangle {
 }
 class Square extends Rectangle {
   constructor (sideLength){
-  super ();
+  super (sideLength, sideLength);
    this.sideLength=sideLength;
   
 }
@@ -2654,7 +2654,9 @@ const mySquare = new Square(7);
 const myRectangle = new Rectangle(5, 25);
 
 console.log(myRectangle.getArea());
+console.log(mySquare);
 console.log(mySquare.getArea());
+
 3. Создай класс `Teacher` с свойствами `name` и `ratings` , а так же методом `gradeStudent(grade)`, который будет добавлять оценку `grade` в массив оценок студента `ratings`.
 class Teacher  {
   constructor (name, rating){
@@ -2723,3 +2725,81 @@ class Product {
 const myProduct = new Product('meat', 100)
 
 console.log(myProduct.priceWithTax())
+
+//callback
+
+1. Напиши функцию sumNumbers, которая принимает два числа a и b и callback-функцию. Функция должна сложить числа a и b ****и передать результат в callback-функцию которая выведет результат в консоль.
+function sumCallback(a,b,callback){
+  const sum = a+b;
+  callback(sum)
+}
+
+function myCallback(sum){
+  console.log(sum)
+}
+
+sumCallback(2,5,myCallback)
+2. Напиши функцию, которая принимает массив и callback-функцию, а затем проходит по каждому элементу массива и вызывает переданную callback-функцию для каждого элемента. Callback-функция должна принимать один аргумент - текущий элемент массива - и выводить его в консоль.
+function myItemCallback(arr, callback) {	
+	for (let elem of arr) {
+		 callback(elem) ; 
+	}
+}
+
+function myCallback(element){
+ console.log(element)
+}
+
+myArr=[1,2,3,4,5]
+myItemCallback(myArr,myCallback)
+3. Напиши функцию, которая принимает массив строк и callback-функцию, а затем вызывает переданную callback-функцию для каждой строки в массиве. Сallback-функция должна преобразовывать строку в верхний регистр и выводить ее в консоль.
+function myUpper(arr, callback) {	
+	for (let elem of arr) {
+		 callback(elem) ; 
+	}
+}
+function myCallback(element){
+ console.log(element.toUpperCase())
+}
+myArr=['bmw','opel','mazda']
+myUpper(myArr,myCallback)
+4. Напиши функцию, которая принимает массив чисел и callback-функцию, а затем вызывает переданную callback-функцию для каждого элемента в массиве. Сallback-функция должна проверять, является ли число четным, и выводить его в консоль, если это так.
+function evenNumber(arr, callback) {	
+	for (let elem of arr) {
+		 callback(elem) ; 
+	}
+}
+function myCallback(element){
+ if (element%2===0){
+  console.log(element)
+ }
+}
+myArr=[1,2,3,4,5,6,7,8]
+evenNumber(myArr,myCallback)
+5. Напиши функцию, которая принимает массив объектов и callback-функцию, а затем вызывает переданную callback-функцию для каждого объекта в массиве. Сallback-функция должна проверять, есть ли у объекта свойство "age" и выводить его значение в консоль, если это так.
+function agePerson(arr, callback) {	
+	for (let elem of arr) {
+		 callback(elem) ; 
+	}
+}
+function myCallback(element){
+ if ('age' in element){
+  console.log(element.age)
+ } else{
+  console.log('Возраст не указан')
+ }
+}
+myArr=[{name:"Vova",
+        age:30
+      },
+      {name:"Pavel",
+        age:25
+      },
+      {name:"Sasha",
+        age:36
+      },
+      {name:"Masha",
+
+      }]
+agePerson(myArr,myCallback)
+
