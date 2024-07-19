@@ -2803,3 +2803,149 @@ myArr=[{name:"Vova",
       }]
 agePerson(myArr,myCallback)
 
+1. Напиши функцию, которая получает на вход два числа и возвращает Promise, который разрешается через 1 секунду с результатом суммы этих чисел. Если одно из чисел не является числом, Promise должен быть отклонен с ошибкой.
+function sumPromise(a,b){
+  const promise = new Promise ((resolve,reject) =>{
+       if (Number.isFinite(a) && Number.isFinite(b)){
+           setTimeout(()=> {
+               resolve (a+b)
+              },1000);
+       } else{
+           reject('Ошибка')
+       }
+
+})
+
+promise
+   .then((result) => {
+       console.log(result); 
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+
+}
+
+sumPromise(2,2)
+sumPromise('a',2)
+2. Напиши функцию **`getUser(id)`**, которая возвращает промис, который разрешается (resolve) пользователем с заданным идентификатором, или отклоняется с ошибкой, если пользователь не найден.
+    
+    ```jsx
+    const users = [
+        { id: 1, name: "Nastya" },
+        { id: 2, name: "Ivan" },
+        { id: 4, name: "Pavel" }
+    ];
+    
+    const getUser = (users, id) => {
+        // ...твой код
+    }
+    
+    getUser(users, 2) // { id: 2, name: "Ivan" }
+    getUser(users, 3) // "Пользователь не найден"
+    ```
+    const users = [
+      { id: 1, name: "Nastya" },
+      { id: 2, name: "Ivan" },
+      { id: 4, name: "Pavel" }
+  ];
+  
+  const getUser = (users, id) => {
+      const promise = new Promise ((resolve,reject) =>{
+          if (users.find(element => element.id === id)) {
+              resolve(users.find(element => element.id === id))
+          } else{
+              reject('Пользователь не найден')
+          }
+  })
+  promise
+      .then((result) => {
+          console.log(result); 
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+  
+  getUser(users, 2) // { id: 2, name: "Ivan" }
+  getUser(users, 3) // "Пользователь не найден"  
+3. Напиши функцию **`sum(numbers)`**, которая возвращает промис, который разрешается (resolve) суммой чисел в массиве, или отклоняется с ошибкой, если массив пуст
+    
+    ```jsx
+    const sum = (numbers) => {
+        // ...твой код
+    }
+    
+    sum([1, 2, 3, 4, 5]).then(sum => console.log(sum)) // 15
+    sum([]).catch(err => console.log(err)) // "Массив пуст"
+    ```
+
+    const sum = (numbers) => {
+      const promise = new Promise ((resolve,reject) =>{
+          if (numbers.length) {
+              resolve(numbers.reduce((prev, item) => prev + item))
+          } else{
+              reject('Массив пуст')
+          }
+  })
+  
+  return promise
+  }
+  
+  sum([1, 2, 3, 4, 5]).then(sum => console.log(sum)) // 15
+  sum([]).catch(err => console.log(err)) // "Массив пуст"
+4. Напиши функцию **`delayedGreeting(name, delay)`**, которая будет возвращать Promise, который будет разрешаться (resolve) через заданный промежуток времени **`delay`** и выводить на экран приветствие **`Hello, ${name}!`**. 
+function delayedGreeting(name, delay){
+  const promise = new Promise ((resolve,reject) =>{
+           setTimeout(()=> {
+               resolve (`Hello, ${name}`)
+              },delay)
+
+})
+
+promise
+   .then((result) => {
+       console.log(result); 
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+
+}
+
+delayedGreeting('Vova',5000)
+delayedGreeting('Pasha',200)
+5. Напиши функцию **`waitForAll(promises)`**, которая будет принимать массив Promise и возвращать новый Promise, который разрешится (resolve), когда все Promise из массива **`promises`** будут выполнены. Результатом выполнения нового Promise будет массив результатов выполнения каждого из Promise из исходного массива.
+function waitForAll(promises){
+  const promise = new Promise ((resolve,reject) =>{
+               resolve (Promise.all(promises))
+              })
+
+
+
+promise
+   .then((result) => {
+       console.log(result); 
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+
+}
+
+const promise1 = new Promise(resolve => setTimeout(()=>resolve("Промисы"), 2000));
+const promise2 = new Promise(resolve => setTimeout(()=>resolve("все"), 1000));
+const promise3 = new Promise(resolve => setTimeout(()=>resolve("выполнены"), 3000));
+
+waitForAll([promise1,promise2,promise3])
+6.Что выведет в консоль и почему? (расписать в ответе)
+Promise.reject('a')
+    .catch(p=>p+'b')
+    .catch(p=>p+'c')
+    .then(p=>p+'d')
+    .finally(p=>p+'e')
+    .then(p=>console.log(p))
+
+Промис завершается с ошибкой, его обрабатывает первый .catch(p=>p+'b'). Далее ошибки нет 
+по цепочке идёт  .then(p=>p+'d'). Далее срабатывает .finally(p=>p+'e')(не принимает оргументов и не 
+влияет на результат промиса). Далее сработает .then(p=>console.log(p)) и выведет abd.
