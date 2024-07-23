@@ -2917,9 +2917,8 @@ delayedGreeting('Vova',5000)
 delayedGreeting('Pasha',200)
 5. Напиши функцию **`waitForAll(promises)`**, которая будет принимать массив Promise и возвращать новый Promise, который разрешится (resolve), когда все Promise из массива **`promises`** будут выполнены. Результатом выполнения нового Promise будет массив результатов выполнения каждого из Promise из исходного массива.
 function waitForAll(promises){
-  const promise = new Promise ((resolve,reject) =>{
-               resolve (Promise.all(promises))
-              })
+  const promise = Promise.all(promises)
+        
 
 
 
