@@ -2948,3 +2948,91 @@ Promise.reject('a')
 Промис завершается с ошибкой, его обрабатывает первый .catch(p=>p+'b'). Далее ошибки нет 
 по цепочке идёт  .then(p=>p+'d'). Далее срабатывает .finally(p=>p+'e')(не принимает оргументов и не 
 влияет на результат промиса). Далее сработает .then(p=>console.log(p)) и выведет abd.
+
+
+1. Напиши асинхронную функцию, которая принимает на вход строку и callback-функцию. Внутри асинхронной функции нужно вызвать callback-функцию через указанное количество миллисекунд, где количество миллисекунд равно длине строки. callback функция должна выводить в консоль переданную строку
+
+async function timeAwait (text, callback){
+  const a=text
+  const date = await callback(a)
+}
+function textWrite(a){
+  setTimeout(() =>{
+    console.log(a)}, a.length)
+   
+  }
+timeAwait("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", textWrite)
+
+2. Напиши функцию, которая получает на вход число и возвращает промис, который будет разрешен только после того, как будет вычислено факториал этого числа.
+
+function factorial(number) {
+  if(number===0){
+  return 1
+  }else {
+  return number* factorial(number-1)
+}
+  }
+
+async function getPromis (number){
+    console.log( await factorial(number));
+}
+getPromis(5)
+3. В задаче нужно написать 2 промиса. Первый вернет твое имя. Второй вернет твой возраст.
+Через асинхронную функцию обработать промисы и вернуть промис, который завершается успешно со значением строки. 
+Пример строки: `"Имя - возраст"` `"Паша - 26"`
+Полученую строку вывести в консоль...
+Если хотя бы один из промисов завершается с отклонением, функция должна вернуть промис со строкой `"плохой запрос"`
+const firstName = new Promise ((resolve,reject) =>{
+       resolve("Вова")
+       reject("плохой запрос")
+   })
+
+const yearsOld = new Promise ((resolve,reject) =>{
+       resolve(26)
+       reject("плохой запрос")
+   })
+
+async function nameAge(){
+    try {
+    let resultName = await firstName
+    let resultYear = await yearsOld
+   console.log(`${resultName} - ${resultYear}`)
+   } 
+   catch (error){
+    console.log(error)
+   }
+}
+
+nameAge()
+4. Напиши функцию, которая получает на вход два аргумента: строку и число. Функция должна возвращать промис, который будет разрешен только после того, как введенная строка будет выведена в консоль указанное количество раз. Например, если функции переданы аргументы "hello" и 3, то промис должен разрешиться только после того, как строка "hello" будет выведена в консоль 3 раза.
+function log(str,n){ 
+  for (let i = 1; i <= n; i++) {
+      console.log(str);
+    }
+}
+
+async function getPromis (str, n){
+    await log(str,n)
+}
+getPromis("10",3)
+5. Напиши функцию, которая принимает 2 промиса (оба успешно завершенных). Первый возвращает твое имя, второй твою фамилию. Функция должна вернуть успешно завершенный промис с имя + фамилия
+const firstName = new Promise ((resolve,reject) =>{
+  resolve("Владимир")
+})
+
+const lastName = new Promise ((resolve,reject) =>{
+  resolve("Щемелёв")
+})
+
+async function fullName(){
+try {
+let resultName = await firstName
+let resulLastName = await lastName
+console.log(`${resultName} ${resulLastName}`)
+} 
+catch (error){
+console.log(error)
+}
+}
+
+fullName()
