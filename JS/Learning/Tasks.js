@@ -2982,25 +2982,38 @@ getPromis(5)
 Пример строки: `"Имя - возраст"` `"Паша - 26"`
 Полученую строку вывести в консоль...
 Если хотя бы один из промисов завершается с отклонением, функция должна вернуть промис со строкой `"плохой запрос"`
-const firstName = new Promise ((resolve,reject) =>{
-       resolve("Вова")
-       reject("плохой запрос")
-   })
+const firstName = Promise.resolve("Вова")
 
-const yearsOld = new Promise ((resolve,reject) =>{
-       resolve(26)
-       reject("плохой запрос")
-   })
+const yearsOld =  Promise.resolve(26)
+
 
 async function nameAge(){
-    try {
-    let resultName = await firstName
-    let resultYear = await yearsOld
-   console.log(`${resultName} - ${resultYear}`)
-   } 
-   catch (error){
-    console.log(error)
-   }
+try {
+let resultName = await firstName
+let resultYear = await yearsOld
+console.log(`${resultName} - ${resultYear}`)
+} 
+catch (error){
+console.log(error)
+}
+}
+
+nameAge()
+//вариант с отклоненным промисом
+const firstName = Promise.reject("плохой запрос")
+
+const yearsOld =  Promise.resolve(26)
+
+
+async function nameAge(){
+try {
+let resultName = await firstName
+let resultYear = await yearsOld
+console.log(`${resultName} - ${resultYear}`)
+} 
+catch (error){
+console.log(error)
+}
 }
 
 nameAge()
@@ -3016,13 +3029,8 @@ async function getPromis (str, n){
 }
 getPromis("10",3)
 5. Напиши функцию, которая принимает 2 промиса (оба успешно завершенных). Первый возвращает твое имя, второй твою фамилию. Функция должна вернуть успешно завершенный промис с имя + фамилия
-const firstName = new Promise ((resolve,reject) =>{
-  resolve("Владимир")
-})
-
-const lastName = new Promise ((resolve,reject) =>{
-  resolve("Щемелёв")
-})
+const firstName = Promise.resolve("Владимир")
+const lastName = Promise.resolve("Щемелёв")
 
 async function fullName(){
 try {
